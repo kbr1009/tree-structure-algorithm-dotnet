@@ -22,7 +22,8 @@ namespace Tree
 
         public virtual TreeNodeBase<T> FindNode(string name) => null;
 
-        public virtual void DisplayTree(int depth = 0) { }
+        public virtual void DisplayTree(int depth = 0) 
+            => Console.WriteLine(ToString(depth));
 
         public virtual string ToString(int depth = 0)
         {

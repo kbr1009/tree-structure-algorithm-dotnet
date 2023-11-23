@@ -41,8 +41,6 @@ namespace TreeTest
         }
 
         public override void DisplayTree(int depth = 0)
-        {
-            Console.WriteLine(ToString(depth));
-        }
+            => Console.WriteLine(ToString(depth));
     }
 }
