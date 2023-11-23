@@ -34,13 +34,27 @@ namespace TreeTest
             {
                 _output.WriteLine("Not Found");
             }
-
-            root.DisplayTree();
-
-            _output.WriteLine(root.ToString());
-
             Assert.True(searchResult != null);
             Assert.Equal(cb1.Name, searchResult.Name);
+        }
+
+        [Fact]
+        public void 正しいフォーマットでTree構造の文字列が出力される()
+        {
+            var root = new TestData("A");
+            var ca1 = new TestData("A-1");
+            var ca2 = new TestData("A-2");
+            var cb1 = new TestData("A-1-1");
+            var cb2 = new TestData("A-2-1");
+
+            root.AddChild(ca1)
+                .AddChild(ca2);
+            ca1.AddChild(cb1);
+            ca2.AddChild(cb2);
+
+            var output = $"- {root.Name}\r\n  - {ca1.Name}\r\n    - {cb1.Name}\r\n  - {ca2.Name}\r\n    - {cb2.Name}\r\n";
+            _output.WriteLine(root.ToString());
+            Assert.Equal(root.ToString(), output);
         }
     }
 }
