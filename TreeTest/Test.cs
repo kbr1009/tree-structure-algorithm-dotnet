@@ -20,8 +20,7 @@ namespace TreeTest
             var cb1 = new TestData("A-1-1");
             var cb2 = new TestData("A-2-1");
 
-            root
-                .AddChild(ca1)
+            root.AddChild(ca1)
                 .AddChild(ca2);
             ca1.AddChild(cb1);
             ca2.AddChild(cb2);
