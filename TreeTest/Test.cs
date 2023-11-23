@@ -26,14 +26,6 @@ namespace TreeTest
             ca2.AddChild(cb2);
 
             var searchResult = root.FindNode(cb1.Name);
-            if (searchResult != null)
-            {
-                _output.WriteLine("Found: " + searchResult.Name);
-            }
-            else
-            {
-                _output.WriteLine("Not Found");
-            }
             Assert.True(searchResult != null);
             Assert.Equal(cb1.Name, searchResult.Name);
         }
