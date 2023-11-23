@@ -14,14 +14,14 @@ namespace TreeTest
 
         public string Name => _name;
 
-        public override TestData? FindNode(string name)
+        public override TestData FindNode(string name)
         {
             if (Name == name) return this;
 
             foreach (var child in Children)
             {
                 var found = child.FindNode(name);
-                if (found != null) return found;
+                if (found != null) return (TestData)found;
             }
             return null;
         }
@@ -29,11 +29,14 @@ namespace TreeTest
         public override string ToString(int depth = 0)
         {
             var sb = new StringBuilder();
-            sb.Append(new string(' ', depth * 2)).AppendLine($"- {_name}");
+            sb.Append(new string(' ', depth * 2))
+                .AppendLine($"- {_name}");
+
             foreach (var child in Children)
             {
                 sb.Append(child.ToString(depth + 1));
             }
+
             return sb.ToString();
         }
 

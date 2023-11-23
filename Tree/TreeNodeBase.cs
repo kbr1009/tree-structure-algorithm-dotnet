@@ -1,4 +1,7 @@
-﻿namespace Tree
+﻿using System.Text;
+using System.Xml.Linq;
+
+namespace Tree
 {
     public abstract class TreeNodeBase<T> : ITreeNode<TreeNodeBase<T>> where T : class
     {
@@ -18,16 +21,28 @@
             set => _children = value;
         }
 
-        public virtual T? FindNode(string name) => null;
+        public virtual TreeNodeBase<T> FindNode(string name) => null;
 
         public virtual void DisplayTree(int depth = 0) { }
 
-        public virtual string ToString(int depth = 0) => string.Empty;
+        public virtual string ToString(int depth = 0)
+        {
+            var sb = new StringBuilder();
+            sb.Append(new string(' ', depth * 2))
+                .AppendLine($"- {this}");
+
+            foreach (var child in Children)
+            {
+                sb.Append(child.ToString(depth + 1));
+            }
+
+            return sb.ToString();
+        }
 
         public virtual TreeNodeBase<T> AddChild(TreeNodeBase<T> child)
         {
             if (child == null)
-                throw new ArgumentNullException("failed: argument data is null.");
+                throw new ArgumentNullException(nameof(child), "child cannot be null.");
 
             this.Children.Add(child);
             child.Parent = this;
