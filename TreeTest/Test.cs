@@ -25,9 +25,27 @@ namespace TreeTest
             ca1.AddChild(cb1);
             ca2.AddChild(cb2);
 
-            var searchResult = root.FindNode(cb1.Name);
+            TestData searchResult = root.FindNode(cb1.Name);
             Assert.True(searchResult != null);
             Assert.Equal(cb1.Name, searchResult.Name);
+        }
+
+        [Fact]
+        public void Tree構造から存在しないオブジェクトを検索した場合NULLが返される()
+        {
+            var root = new TestData("A");
+            var ca1 = new TestData("A-1");
+            var ca2 = new TestData("A-2");
+            var cb1 = new TestData("A-1-1");
+            var cb2 = new TestData("A-2-1");
+
+            root.AddChild(ca1)
+                .AddChild(ca2);
+            ca1.AddChild(cb1);
+            ca2.AddChild(cb2);
+
+            TestData searchResult = root.FindNode("non data");
+            Assert.True(searchResult is null);
         }
 
         [Fact]
